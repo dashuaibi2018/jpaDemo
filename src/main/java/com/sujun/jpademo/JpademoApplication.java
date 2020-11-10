@@ -1,13 +1,13 @@
-package com.sujun.erpdemo;
+package com.sujun.jpademo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ErpdemoApplication {
+public class JpademoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ErpdemoApplication.class, args);
+		SpringApplication.run(JpademoApplication.class, args);
 	}
 
 }
