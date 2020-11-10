@@ -1,6 +1,6 @@
 package com.sujun.jpademo.service;
 
-import com.sujun.jpademo.domain.City;
+import com.sujun.jpademo.entity.City;
 
 import java.util.List;
 

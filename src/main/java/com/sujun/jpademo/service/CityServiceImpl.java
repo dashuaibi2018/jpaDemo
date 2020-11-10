@@ -1,7 +1,7 @@
 package com.sujun.jpademo.service;
 
 import com.sujun.jpademo.dao.CityDao;
-import com.sujun.jpademo.domain.City;
+import com.sujun.jpademo.entity.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

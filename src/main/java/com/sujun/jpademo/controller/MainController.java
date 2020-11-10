@@ -1,75 +1,68 @@
 package com.sujun.jpademo.controller;
 
-import com.sujun.jpademo.domain.City;
-import com.sujun.jpademo.service.CityService;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.sujun.jpademo.entity.Account;
+import com.sujun.jpademo.entity.RespStat;
+import com.sujun.jpademo.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 
-/**
- * 在我们访问  http://主机名：端口号/context-path/Controller的URI/方法的URI
- * http://localhost:80/boot/user/list
- * @author Administrator
- * @Controller 加入Spring容器管理,单例
- */
+
 @Controller
 public class MainController {
 
+    @Autowired
+    AccountService accSrv;
+
+    @RequestMapping("/listAll")
+    @ResponseBody
+    public Object list () {
+//        	List<Account> list = accSrv.findAll();
+        //  SQL ->  HQL select account0_.id as id1_0_0_, account0_.age as age2_0_0_, account0_.location as location3_0_0_, account0_.login_name as login_na4_0_0_, account0_.nick_name as nick_nam5_0_0_, account0_.password as password6_0_0_ from account account0_ where account0_.id=?
+        Object  account = accSrv.findxxx();
+        System.out.println("account:" + account);
+        return account;
+    }
 
     /**
-     * String 类型的返回值，会找模板文件
+     * 区分 get 和post 请求
      *
-     *   context/ + /user +  /list
-     *   context/ + list
+     * get : 展示页面
+     * post：收集数据
      * @return
      */
+    @GetMapping("/register")
+    public String register (Model map) {
 
-    @Autowired
-    CityService citySrv;
+        System.out.println("======get=====");
 
-    @RequestMapping("/list")
-    public String list(Model map) {
-
-        List<City> list = citySrv.findAll();
-
-        map.addAttribute("list", list);
-        return "list";
+        map.addAttribute("obj", "aa");
+        return "register";
     }
 
-    @RequestMapping("/list/{id}")
-    public String getOne(@PathVariable("id") Integer id , Model map) {
+    @PostMapping("/register")
+    public String registerP (HttpServletRequest request, Account account) {
 
-        City city = citySrv.findOne(id);
+        RespStat stat =  accSrv.save(account);
+        request.setAttribute("stat", stat);
 
-        map.addAttribute("city", city);
-        return "one";
+        return "register";
+    }
+
+    @RequestMapping("/login")
+    public String login () {
+
+        return "login";
     }
 
 
-
-
-
-    @RequestMapping("/add")
-    public String add(@ModelAttribute City city, Model map) {
-
-        System.out.println(city);
-        String success =citySrv.add(city);
-
-//
-//		String success = citySrv.add(id,name);
-        map.addAttribute("success", success);
-        return "add";
-    }
-
-    @RequestMapping("/addPage")
-    public String addPage() {
-
-        return "add";
-    }
 }

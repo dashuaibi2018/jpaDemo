@@ -1,6 +1,6 @@
 package com.sujun.jpademo.dao;
 
-import com.sujun.jpademo.domain.City;
+import com.sujun.jpademo.entity.City;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;

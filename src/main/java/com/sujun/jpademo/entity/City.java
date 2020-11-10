@@ -1,4 +1,4 @@
-package com.sujun.jpademo.domain;
+package com.sujun.jpademo.entity;
 
 import javax.persistence.*;
 
